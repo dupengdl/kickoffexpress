@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node server.js",
+    "prod": "NODE_ENV=production node server.js",
     "lint": "eslint src",
     "lintfix": "eslint src --fix",
     "build": "rm -rf static/ && NODE_ENV=production webpack --progress --config webpack.production.js"
@@ -33,6 +34,7 @@
     "file-loader": "^0.8.5",
     "html-webpack-plugin": "^2.16.0",
     "node-sass": "^3.4.2",
+    "opener": "^1.4.1",
     "postcss-loader": "^0.8.0",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.12.4",
@@ -42,8 +44,16 @@
     "webpack-hot-middleware": "^2.10.0"
   },
   "dependencies": {
+    "body-parser": "^1.15.0",
+    "connect-redis": "^3.0.2",
+    "cookie-parser": "^1.4.1",
     "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "mongoose": "^4.4.12",
+    "mongoose-user": "0.0.1",
     "normalize.css": "^3.0.3",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
     "react-redux": "^4.2.1",

@@ -1,0 +1,18 @@
+/**
+ * 用户表
+ */
+var mongoose = require('mongoose');
+var userPlugin = require('mongoose-user');
+var Schema = mongoose.Schema;
+
+var UserSchema = new Schema({
+  name: {type: String, 'default': '', unique: true},
+  email: {type: String, 'default': '', unique: true},
+  hashed_passord: {type: String, 'default': ''},
+  salt: {type: String, default: ''},
+  createTime: {type: Date, default: Date.now}
+});
+
+UserSchema.plugin(userPlugin);
+
+module.exports = mongoose.model('User', UserSchema);

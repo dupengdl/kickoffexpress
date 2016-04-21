@@ -1,37 +1,116 @@
 var webpack = require('webpack');
+var config = require('./webpack.config');
+var prodConfig = require('./webpack.production');
+var path = require('path');
+var staticPath = path.join(__dirname, config.output.publicPath);
 var express = require('express');
 var app = express();
-var config = require('./webpack.config');
 var host = 'localhost';
 var port = process.env.PORT || 3000;
-var hotArray = ['webpack-dev-server/client?http://' + host + ':' + port, 'webpack/hot/only-dev-server'];
+var open = require('opener');
 
-(function (entry) {
-  if (entry) {
-    for (var i in entry) {
-      entry[i] = [].concat(hotArray, entry[i]);
-    }
-  }
-})(config.entry);
+var env = process.env.NODE_ENV;
+var passport = require('passport');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var RedisStore = require('connect-redis')(session);
+var mongoose = require('mongoose');
+var mongoConfig = require('./api/config/mongo');
+var cookieConfig = require('./api/config/cookie');
 
-var compiler = webpack(config);
-
-app.use(require("webpack-dev-middleware")(compiler, {
-  noInfo: true,
-  publicPath: config.output.publicPath,
-  hot: true,
-  historyApiFallback: true,
-  stats: {
-    colors: true
-  }
+//express中间件配置
+//If enabled, be sure to use express.session() before passport.session()
+app.use(session({
+  resave: true,
+  saveUninitialized: false,
+  secret: 'kickoffexpress',
+  store: new RedisStore({
+    db: 'kickoffexpress'
+  }),
+  cookie: cookieConfig
 }));
 
-app.use(require("webpack-hot-middleware")(compiler));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
+app.use(cookieParser());
 
-app.listen(port, host, function (err, result) {
-  if (err) {
-    console.log(err);
-  }
+//passport配置
+app.use(passport.initialize());
+app.use(passport.session());
+require('./api/config/passport')(passport);
 
-  console.log('Listening at ' + host + ':' + port);
-});
+//mongodb配置
+function connect() {
+  mongoose.connect(mongoConfig.uri, mongoConfig.options);
+}
+connect();
+mongoose.connection.on('error', console.log);
+mongoose.connection.on('disconnected', connect);
+
+//路由配置
+app.use('/api', require('./api'));
+
+//webpack配置
+if ('production' === env) {
+  console.log('Webpack now compiles.');
+  //启动webpack编译
+  webpack(prodConfig, function (err, stats) {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    console.log('Compiled Success.');
+    //创建服务器
+    app.use(express.static(staticPath));
+
+    app.get('*', function (req, res) {
+      res.sendFile(path.join(staticPath, 'index.html'));
+    });
+
+    app.listen(port, function (err) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+
+      console.log('Listening at ' + host + ':' + port);
+      open('http://' + host + ':' + port);
+    });
+  });
+} else {
+  var hotArray = ['webpack-dev-server/client?http://' + host + ':' + port, 'webpack/hot/only-dev-server'];
+
+  (function (entry) {
+    if (entry) {
+      for (var i in entry) {
+        entry[i] = [].concat(hotArray, entry[i]);
+      }
+    }
+  })(config.entry);
+
+  var compiler = webpack(config);
+
+  app.use(require("webpack-dev-middleware")(compiler, {
+    noInfo: true,
+    publicPath: config.output.publicPath,
+    hot: true,
+    historyApiFallback: true,
+    stats: {
+      colors: true
+    }
+  }));
+
+  app.use(require("webpack-hot-middleware")(compiler));
+
+  app.listen(port, host, function (err, result) {
+    if (err) {
+      console.log(err);
+    }
+
+    console.log('Listening at ' + host + ':' + port);
+    open('http://' + host + ':' + port);
+  });
+}
