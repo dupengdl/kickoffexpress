@@ -35,10 +35,10 @@ module.exports = function (passport) {
 
   // 用户登录请求时,将用户id序列化到session中
   passport.serializeUser(function (user, done) {
-    done(null, user.id)
+    done(null, user._id)
   });
 
-  // 后续请求根据session_id查找user并在req对象上添加user对象
+  // 后续请求根据之前存储的user.id查找user并在req对象上添加user对象
   passport.deserializeUser(function (id, done) {
     User.findOne({_id: id}, function (err, user) {
       done(err, user)

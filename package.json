@@ -5,10 +5,10 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node server.js",
+    "build": "rm -rf static/ && NODE_ENV=production webpack --progress --config webpack.production.js",
     "prod": "NODE_ENV=production node server.js",
     "lint": "eslint src",
-    "lintfix": "eslint src --fix",
-    "build": "rm -rf static/ && NODE_ENV=production webpack --progress --config webpack.production.js"
+    "lintfix": "eslint src --fix"
   },
   "repository": {
     "type": "git",
@@ -57,6 +57,7 @@
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
     "react-redux": "^4.2.1",
-    "redux": "^3.2.1"
+    "redux": "^3.2.1",
+    "serve-favicon": "^2.3.0"
   }
 }

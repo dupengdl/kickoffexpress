@@ -11,6 +11,7 @@ var open = require('opener');
 
 var env = process.env.NODE_ENV;
 var passport = require('passport');
+var favicon = require('serve-favicon');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
@@ -20,6 +21,8 @@ var mongoConfig = require('./api/config/mongo');
 var cookieConfig = require('./api/config/cookie');
 
 //express中间件配置
+app.use(favicon(path.join(__dirname, 'app/image/favicon.ico')));
+
 //If enabled, be sure to use express.session() before passport.session()
 app.use(session({
   resave: true,
@@ -30,7 +33,6 @@ app.use(session({
   }),
   cookie: cookieConfig
 }));
-
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -67,7 +69,7 @@ if ('production' === env) {
     app.use(express.static(staticPath));
 
     app.get('*', function (req, res) {
-      res.sendFile(path.join(staticPath, 'index.html'));
+      res.send('404 Not Found');
     });
 
     app.listen(port, function (err) {
@@ -104,6 +106,10 @@ if ('production' === env) {
   }));
 
   app.use(require("webpack-hot-middleware")(compiler));
+
+  app.get('*', function (req, res) {
+    res.sendFile(path.join(staticPath, 'index.html'));
+  });
 
   app.listen(port, host, function (err, result) {
     if (err) {

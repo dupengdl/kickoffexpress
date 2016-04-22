@@ -4,7 +4,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('./controllers/user');
-
+var Todo = require('./controllers/todo');
 var handler = require('./utils/handler');
 var rtn = require('./utils/rtn');
 
@@ -28,6 +28,10 @@ function needLogin(req, res, next) {
 
 router.post('/register', User.register);
 router.post('/login', User.login);
+router.all('*', needLogin);
+router.get('/todos', Todo.index);
+router.post('/todo/add', Todo.add);
+router.put('/todo/:todoId', Todo.update);
 
 router.get('*', function(req, res) {
   res.status(404).json({
