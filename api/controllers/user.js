@@ -19,7 +19,7 @@ exports.register = function (req, res) {
     email: req.body.email,
     name: req.body.username,
     password: req.body.password
-  }).then(function (account) {
+  }).then(function () {
     passport.authenticate('local')(req, res, function () {
       res.cookie('username', req.user.name, cookieConfig);
 
@@ -45,6 +45,7 @@ exports.register = function (req, res) {
  */
 exports.login = function (req, res, next) {
   passport.authenticate('local', function (err, user, info) {
+    //根据strategy定义的验证函数返回来进行不同处理
     if (err) {
       return handler.handleError(res, '服务器错误');
     }
@@ -52,6 +53,7 @@ exports.login = function (req, res, next) {
       return handler.handleError(res, '邮箱或密码输入有误', rtn.NO_USER);
     }
 
+    //req.logIn()方法为passport添加到req对象上的方法,手动调用此方法来设置session信息
     req.logIn(user, function (err) {
       if (err) {
         return next(err);
@@ -59,9 +61,9 @@ exports.login = function (req, res, next) {
 
       res.cookie('username', req.user.name, cookieConfig);
 
+      //验证成功,返回请求
       return handler.send(res);
     });
   })(req, res, next);
-
 };
 

@@ -13,6 +13,7 @@ var UserSchema = new Schema({
   createTime: {type: Date, default: Date.now}
 });
 
+//userPlugin为一个为用户Schema添加加密密码&Salt和密码验证方法的plugin
 UserSchema.plugin(userPlugin);
 
 module.exports = mongoose.model('User', UserSchema);

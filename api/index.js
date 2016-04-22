@@ -17,13 +17,14 @@ router.get('/cors', function(req, res, next){
   });
 });
 
-//function needLogin(req, res, next) {
-//  if (!req.isAuthenticated()) {
-//    handler.handleError(res, rtn.NO_LOGIN, '用户未登录');
-//  } else {
-//    next();
-//  }
-//}
+function needLogin(req, res, next) {
+  //req.isAuthenticated()方法为passport添加到req对象上的方法,用来判断是否登录
+  if (!req.isAuthenticated()) {
+    handler.handleError(res, rtn.NO_LOGIN, '用户未登录');
+  } else {
+    next();
+  }
+}
 
 router.post('/register', User.register);
 router.post('/login', User.login);

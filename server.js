@@ -37,7 +37,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-//passport配置
+//passport初始化
 app.use(passport.initialize());
 app.use(passport.session());
 require('./api/config/passport')(passport);
