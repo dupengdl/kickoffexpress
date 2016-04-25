@@ -1,5 +1,5 @@
 /**
- * mongoose最新更新时间
+ * mongoose最新更新时间插件
  */
 
 module.exports = function lastModifiedPlugin(schema) {

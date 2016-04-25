@@ -1,3 +1,5 @@
+'use strict';
+
 var Todo = require('../models/todo');
 
 exports.create = function (params) {
