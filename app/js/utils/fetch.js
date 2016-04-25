@@ -9,12 +9,12 @@ import {ERROR_MESSAGE} from '../constants/ActionTypes';
  *
  * @param dispatch Redux分发
  * @param url 请求URL
- * @param headers 请求头
+ * @param param 其他请求信息,如method,credentials,headers,body等
  * @param cb 成功回调
  * @return undefined
  */
-export default function fetchData(dispatch, url, headers, cb) {
-  fetch(url, headers).then(response => response.json()).then(json => {
+export default function fetchData(dispatch, url, param, cb) {
+  fetch(url, param).then(response => response.json()).then(json => {
     if (json.rtn === 0) {
       cb && cb(json);
     } else {
