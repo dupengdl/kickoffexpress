@@ -7,7 +7,6 @@ var express = require('express');
 var app = express();
 var host = 'localhost';
 var port = process.env.PORT || 3000;
-var open = require('opener');
 
 var env = process.env.NODE_ENV;
 var passport = require('passport');
@@ -76,7 +75,6 @@ if ('production' === env) {
       }
 
       console.log('Listening at ' + host + ':' + port);
-      open('http://' + host + ':' + port);
     });
   });
 } else {
@@ -104,6 +102,5 @@ if ('production' === env) {
     }
 
     console.log('Listening at ' + host + ':' + port);
-    open('http://' + host + ':' + port);
   });
 }
