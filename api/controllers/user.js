@@ -67,3 +67,20 @@ exports.login = function (req, res, next) {
   })(req, res, next);
 };
 
+/**
+ * 用户登出
+ */
+exports.logout = function (req, res, next) {
+  //销毁session
+  req.session.destroy(function(err){
+    if (err) {
+      return next(err);
+    }
+    //调用passport在req对象上添加的logout方法,以销毁在session当中添加的user对象
+    req.logOut();
+    //清除客户端cookie
+    res.clearCookie('connect.sid');
+    res.clearCookie('username');
+    handler.send(res);
+  });
+};
