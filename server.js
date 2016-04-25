@@ -22,24 +22,21 @@ var cookieConfig = require('./api/config/cookie');
 
 //express中间件配置
 app.use(favicon(path.join(__dirname, 'app/image/favicon.ico')));
-
-//If enabled, be sure to use express.session() before passport.session()
 app.use(session({
   resave: true,
   saveUninitialized: false,
   secret: 'kickoffexpress',
   store: new RedisStore({
-    db: 'kickoffexpress'
+    db: 1
   }),
   cookie: cookieConfig
 }));
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
 //passport初始化
+//If enabled, be sure to use express.session() before passport.session()
 app.use(passport.initialize());
 app.use(passport.session());
 require('./api/config/passport')(passport);
@@ -83,16 +80,6 @@ if ('production' === env) {
     });
   });
 } else {
-  var hotArray = ['webpack-dev-server/client?http://' + host + ':' + port, 'webpack/hot/only-dev-server'];
-
-  (function (entry) {
-    if (entry) {
-      for (var i in entry) {
-        entry[i] = [].concat(hotArray, entry[i]);
-      }
-    }
-  })(config.entry);
-
   var compiler = webpack(config);
 
   app.use(require("webpack-dev-middleware")(compiler, {

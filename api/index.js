@@ -20,6 +20,7 @@ router.get('/cors', function(req, res, next){
 function needLogin(req, res, next) {
   //req.isAuthenticated()方法为passport添加到req对象上的方法,用来判断是否登录
   if (!req.isAuthenticated()) {
+    //如果未登录,返回未登录的错误状态码,由前端做验证处理
     handler.handleError(res, '用户未登录', rtn.NO_LOGIN);
   } else {
     next();
