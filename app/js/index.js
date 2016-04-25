@@ -24,12 +24,6 @@ function requireAuth(nextState, replaceState) {
   }
 }
 
-function notRequireAuth(nextState, replaceState) {
-  if(auth.loggedIn()) {
-    replaceState({ nextPathname: nextState.location.pathname }, '/admin');
-  }
-}
-
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
