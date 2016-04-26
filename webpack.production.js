@@ -72,7 +72,7 @@ var config = {
     new webpack.NoErrorsPlugin(),
     new HtmlWebpackPlugin({
       template: './app/index.html',
-      filename: 'index.production.html',
+      filename: 'index.html',
       inject: true,
       minify: {    //压缩HTML文件
         removeComments: true,    //移除HTML中的注释
