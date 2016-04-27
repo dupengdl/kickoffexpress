@@ -30,11 +30,9 @@ exports.index = function (req, res) {
  */
 exports.add = function (req, res) {
   var text = req.body.text;
-  var complete = req.body.complete;
 
   todoHelper.create({
     text: text,
-    complete: complete,
     author: req.user._id
   }).then(function (tag) {
     handler.send(res, tag);
