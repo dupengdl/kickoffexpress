@@ -46,7 +46,7 @@ exports.add = function (req, res) {
 };
 
 /**
- * 更新todo(标记完成或未完成)
+ * 更新todo(编辑文本或更改状态)
  * 请求类型：PUT
  * id todoId
  * text todo文本
@@ -56,11 +56,12 @@ exports.update = function (req, res) {
   var id = req.params.todoId;
   var text = req.body.text;
   var complete = req.body.complete;
+  var param = Object.assign({},
+      text == undefined ? {text: text} : {},
+      complete == undefined ? {complete: complete} : {}
+  );
 
-  todoHelper.update(id, {
-    text: text,
-    complete: complete
-  }).then(function (tag) {
+  todoHelper.update(id, param).then(function (tag) {
     handler.send(res, tag);
   }).catch(function (err) {
     var msg = '服务器连接失败，请稍后重试';
