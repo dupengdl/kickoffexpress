@@ -13,7 +13,7 @@ var TodoSchema = new Schema({
   author: {type: Schema.Types.ObjectId, ref: 'User'}
 });
 
-TodoSchema.index({text: 1});
+TodoSchema.index({created: 1});
 
 TodoSchema.plugin(lastMod);
 

@@ -24,9 +24,9 @@ exports.findAllOfMine = function (params) {
   })
 };
 
-exports.update = function (params) {
+exports.update = function (id, params) {
   return new Promise(function (resolve, reject) {
-    Todo.update({_id: params.id}, {$set: {complete: params.complete}}).exec(function (err, todo) {
+    Todo.update({_id: id}, {$set: params}).exec(function (err, todo) {
       if (err) {
         return reject(err);
       }

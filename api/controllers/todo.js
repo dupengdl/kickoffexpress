@@ -48,15 +48,17 @@ exports.add = function (req, res) {
 /**
  * 更新todo(标记完成或未完成)
  * 请求类型：PUT
- * id: todoid
- * complete: 完成标记
+ * id todoId
+ * text todo文本
+ * complete 完成标记
  */
 exports.update = function (req, res) {
   var id = req.params.todoId;
+  var text = req.body.text;
   var complete = req.body.complete;
 
-  todoHelper.create({
-    id: id,
+  todoHelper.update(id, {
+    text: text,
     complete: complete
   }).then(function (tag) {
     handler.send(res, tag);
