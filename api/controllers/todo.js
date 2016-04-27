@@ -34,8 +34,8 @@ exports.add = function (req, res) {
   todoHelper.create({
     text: text,
     author: req.user._id
-  }).then(function (tag) {
-    handler.send(res, tag);
+  }).then(function (todo) {
+    handler.send(res, todo);
   }).catch(function (err) {
     var msg = '服务器连接失败，请稍后重试';
 
@@ -59,10 +59,27 @@ exports.update = function (req, res) {
       complete == undefined ? {complete: complete} : {}
   );
 
-  todoHelper.update(id, param).then(function (tag) {
-    handler.send(res, tag);
+  todoHelper.update(id, param).then(function (todo) {
+    handler.send(res, todo);
   }).catch(function (err) {
     var msg = '服务器连接失败，请稍后重试';
+    handler.handleError(res, msg);
+  });
+};
+
+/**
+ * 删除todo
+ * 请求类型：DELETE
+ * id todoId
+ */
+exports.delete = function (req, res) {
+  var id = req.params.todoId;
+
+  todoHelper.delete(id).then(function (todo) {
+    handler.send(res, todo);
+  }).catch(function (err) {
+    var msg = '服务器连接失败，请稍后重试';
+
     handler.handleError(res, msg);
   });
 };

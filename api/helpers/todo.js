@@ -35,3 +35,13 @@ exports.update = function (id, params) {
   });
 };
 
+exports.delete = function (id) {
+  return new Promise(function (resolve, reject) {
+    Todo.remove({_id: id}, {$set: params}).exec(function (err, todo) {
+      if (err) {
+        return reject(err);
+      }
+      resolve(todo);
+    });
+  });
+};
