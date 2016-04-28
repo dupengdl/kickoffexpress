@@ -22,7 +22,7 @@ export default function fetchData(dispatch, url, param, cb) {
         dispatch({
           type: ERROR_MESSAGE,
           error: json.msg,
-          redirect: '/admin/login'
+          redirect: '/login'
         });
       } else {
         dispatch({
