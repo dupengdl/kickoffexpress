@@ -5,11 +5,6 @@
 import cookie from './cookie';
 
 export default {
-  logout() {
-    cookie.remove('connect.sid');
-    cookie.remove('username');
-  },
-
   loggedIn() {
     let sid = cookie.get('connect.sid');
     let username = cookie.get('username');
