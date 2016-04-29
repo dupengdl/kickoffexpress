@@ -26,7 +26,7 @@ exports.index = function (req, res) {
  * 添加todo
  * 请求类型：POST
  * text: todo内容
- * complete: 完成标记
+ * author: 所属人
  */
 exports.add = function (req, res) {
   var text = req.body.text;
@@ -48,15 +48,15 @@ exports.add = function (req, res) {
  * 请求类型：PUT
  * id todoId
  * text todo文本
- * complete 完成标记
+ * completed 完成标记
  */
 exports.update = function (req, res) {
   var id = req.params.todoId;
   var text = req.body.text;
-  var complete = req.body.complete;
+  var completed = req.body.completed;
   var param = Object.assign({},
-      text == undefined ? {text: text} : {},
-      complete == undefined ? {complete: complete} : {}
+    (typeof text != 'undefined') ? {text: text} : {},
+    (typeof completed != 'undefined') ? {completed: completed} : {}
   );
 
   todoHelper.update(id, param).then(function (todo) {

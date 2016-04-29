@@ -8,7 +8,7 @@ var Schema = mongoose.Schema;
 
 var TodoSchema = new Schema({
   text: {type: String, default:''},
-  complete: {type: Boolean, default: false},
+  completed: {type: Boolean, default: false},
   created: {type: Date, default: Date.now},
   author: {type: Schema.Types.ObjectId, ref: 'User'}
 });
