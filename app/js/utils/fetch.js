@@ -16,22 +16,23 @@ import {ERROR_MESSAGE} from '../constants/ActionTypes';
 export default function fetchData(dispatch, url, param, cb) {
   fetch(url, param).then(response => response.json()).then(json => {
     if (json.rtn === 0) {
+      //正常
       cb && cb(json);
+    } else if (json.rtn === 2) {
+      //未登录
+      dispatch({
+        type: ERROR_MESSAGE,
+        error: json.msg,
+        redirect: '/login'
+      });
     } else {
-      if (json.rtn === 2) {//未登录
-        dispatch({
-          type: ERROR_MESSAGE,
-          error: json.msg,
-          redirect: '/login'
-        });
-      } else {
-        dispatch({
-          type: ERROR_MESSAGE,
-          error: json.msg
-        });
-      }
+      //其他情况
+      dispatch({
+        type: ERROR_MESSAGE,
+        error: json.msg
+      });
     }
-  }).catch(function(err) {
+  }).catch(function (err) {
     dispatch({
       type: ERROR_MESSAGE,
       error: err
