@@ -11,7 +11,7 @@ var local = new LocalStrategy({
       passwordField: 'password'
     },
     function (email, password, done) {
-      User.findOne({username: username}, function (err, user) {
+      User.findOne({email: email}, function (err, user) {
         //查询失败,标记为验证失败
         if (err) return done(err);
         //未查询到结果,标记为验证失败
