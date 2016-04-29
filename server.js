@@ -51,8 +51,9 @@ mongoose.connection.on('disconnected', connect);
 //路由配置
 app.use('/api', require('./api'));
 
-//webpack配置
+//服务器配置
 if ('production' === env) {
+  //生产环境
   console.log('Webpack now compiles.');
   //启动webpack编译
   webpack(prodConfig, function (err, stats) {
@@ -61,7 +62,7 @@ if ('production' === env) {
       return;
     }
     console.log('Compiled Success.');
-    //创建服务器
+    //创建静态文件服务器
     app.use(express.static(staticPath));
 
     app.get('*', function (req, res) {
@@ -78,8 +79,10 @@ if ('production' === env) {
     });
   });
 } else {
+  //开发环境
   var compiler = webpack(config);
 
+  //使用webpack中间件创建支持热替换的静态文件服务器
   app.use(require("webpack-dev-middleware")(compiler, {
     noInfo: true,
     publicPath: config.output.publicPath,
@@ -89,7 +92,6 @@ if ('production' === env) {
       colors: true
     }
   }));
-
   app.use(require("webpack-hot-middleware")(compiler));
 
   app.get('*', function (req, res) {
