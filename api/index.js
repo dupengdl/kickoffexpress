@@ -34,7 +34,7 @@ router.all('*', needLogin);
 router.get('/todos', Todo.index);
 router.post('/todo/add', Todo.add);
 router.put('/todo/:todoId', Todo.update);
-router.del('/todo/:todoId', Todo.delete);
+router.delete('/todo/:todoId', Todo.delete);
 
 router.get('*', function(req, res) {
   res.status(404).json({
