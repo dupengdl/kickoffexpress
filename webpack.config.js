@@ -8,7 +8,7 @@ var config = {
   devtool: 'inline-source-map',
   entry: {
     'index': './app/js/index.js',
-    'vendor': ['react', 'react-dom', 'redux', 'react-redux']
+    'vendor': ['react', 'react-dom', 'redux', 'redux-thunk', 'react-redux', 'react-router']
   },
   output: {
     path: path.join(__dirname, 'static'),
