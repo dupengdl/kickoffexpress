@@ -95,7 +95,7 @@ if ('production' === env) {
   app.use(require("webpack-hot-middleware")(compiler));
 
   app.get('*', function (req, res) {
-    res.sendFile(path.join(staticPath, 'index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
   });
 
   app.listen(port, host, function (err, result) {
