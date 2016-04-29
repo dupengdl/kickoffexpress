@@ -77,7 +77,7 @@ export function requestEditTodo(id, text) {
   };
 }
 
-export function requestCompleteTodo(id, complete) {
+export function requestCompleteTodo(id, completed) {
   return dispatch => {
     fetchData(dispatch, '/api/todo/' + id, {
       method: 'put',
@@ -87,7 +87,7 @@ export function requestCompleteTodo(id, complete) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        complete
+        completed
       })
     }, function (json) {
       dispatch(editTodo(json.data));
