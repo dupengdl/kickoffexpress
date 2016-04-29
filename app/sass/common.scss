@@ -9,6 +9,8 @@ body {
   font-family: monospace, "Source Sans Pro", Helvetica, "Microsoft Yahei", sans-serif;
   font-size: 14px;
   background: $bg_color;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 * {
