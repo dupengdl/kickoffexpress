@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node server.js",
-    "debug": "supervisor -i client server.js",
+    "debug": "supervisor --ignore app server.js",
     "build": "rm -rf static/ && NODE_ENV=production webpack --progress --config webpack.production.js",
     "prod": "NODE_ENV=production node server.js",
     "lint": "eslint src",
