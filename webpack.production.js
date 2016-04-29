@@ -30,6 +30,10 @@ var config = {
         loader: ExtractTextPlugin.extract('style', 'css!postcss!sass')
       },
       {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style', 'css!postcss')
+      },
+      {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loaders: [
           //'image?{bypassOnDebug: true, progressive:true, optimizationLevel: 3, pngquant:{quality: '65-80'}}',
@@ -37,22 +41,19 @@ var config = {
         ]
       },
       {
-        test: /\.svg$/,
-        loader: 'url?limit=10000&mimetype=image/svg+xml&name=image/[name].[hash:8].[ext]'
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url?limit=10000&minetype=application/font-woff&name=font/[name].[hash:8].[ext]'
       },
       {
-        test: /\.(woff|eot|ttf)$/i,
-        loader: 'url?limit=10000&name=font/[name].[hash:8].[ext]'
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/i,
+        loader: 'file?name=font/[name].[hash:8].[ext]'
       }
     ]
   },
   sassLoader: {
-    includePaths: [path.resolve(__dirname, './app/sass'), path.resolve(__dirname, './node_modules')]
+    includePaths: [path.resolve(__dirname, './app/sass'), path.resolve(__dirname, './node_modules'), path.resolve(__dirname, './node_modules/font-awesome/css')]
   },
   postcss: [autoprefixer({browsers: ['last 2 versions']})],
-  resolve: {
-    extensions: ['', '.js', '.jsx', '.scss']
-  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
