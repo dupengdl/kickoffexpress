@@ -1,12 +1,12 @@
 /**
  * 路由跳转中间件
  */
-import history from '../utils/history';
+import {browserHistory} from 'react-router';
 
 export default store => next => action => {
   if (!action.redirect) {
     return next(action);
   }
 
-  history.replaceState(null, action.redirect);
+  browserHistory.replace(action.redirect);
 };
