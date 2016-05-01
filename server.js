@@ -80,10 +80,21 @@ if ('production' === env) {
   });
 } else {
   //开发环境
+  //添加热替换文件入口
+  var hotArray = ['webpack-hot-middleware/client'];
+  (function(entry) {
+    if(entry){
+      for(var i in entry){
+        if(i != 'vendor'){
+          entry[i] = [].concat(hotArray, entry[i]);
+        }
+      }
+    }
+  })(config.entry);
   var compiler = webpack(config);
 
   //使用webpack中间件创建支持热替换的静态文件服务器
-  app.use(require("webpack-dev-middleware")(compiler, {
+  app.use(require('webpack-dev-middleware')(compiler, {
     noInfo: true,
     publicPath: config.output.publicPath,
     hot: true,
@@ -92,7 +103,7 @@ if ('production' === env) {
       colors: true
     }
   }));
-  app.use(require("webpack-hot-middleware")(compiler));
+  app.use(require('webpack-hot-middleware')(compiler));
 
   app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, 'index.html'));
