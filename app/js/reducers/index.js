@@ -8,19 +8,19 @@ import errorMessage from './errorMessage';
 function todos(state = [], action = null) {
   switch (action.type) {
     case TODOS:
-      return Object.assign([], state, action.todos);
+      return [].concat(action.todos);
 
     case ADD_TODO:
       return [action.todo, ...state];
 
     case DELETE_TODO:
       return state.filter(todo =>
-          todo.id !== action.id
+          todo._id !== action._id
       );
 
     case EDIT_TODO:
       return state.map(todo =>
-        todo.id === action.todo.id ? action.todo : todo
+        todo._id === action.todo._id ? action.todo : todo
       );
 
     default:
