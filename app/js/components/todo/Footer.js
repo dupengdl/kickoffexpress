@@ -38,10 +38,10 @@ class Footer extends Component {
       <footer className="footer">
         {this.renderTodoCount()}
         <ul className="filters">
-          {[ SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED ].map(filter =>
-            <li key={filter}>
-              {this.renderFilterLink(filter)}
-            </li>
+          {[SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED].map(filter =>
+              <li key={filter}>
+                {this.renderFilterLink(filter)}
+              </li>
           )}
         </ul>
       </footer>
@@ -53,7 +53,7 @@ Footer.propTypes = {
   completedCount: PropTypes.number.isRequired,
   activeCount: PropTypes.number.isRequired,
   filter: PropTypes.string.isRequired,
-  onClearCompleted: PropTypes.func.isRequired,
+  onClearCompleted: PropTypes.func,
   onShow: PropTypes.func.isRequired
 };
 
