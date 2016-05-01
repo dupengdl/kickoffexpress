@@ -11,7 +11,7 @@ class App extends Component {
 
   logout() {
     const {dispatch} = this.props;
-    dispatch(requestLogout('/'));
+    dispatch(requestLogout('/login'));
   }
 
   render() {
