@@ -31,11 +31,11 @@ class TodoItem extends Component {
     } else {
       this.handleEdit(id, text);
     }
-    this.setState({ editing: false });
+    this.setState({editing: false});
   }
 
   handleDoubleClick() {
-    this.setState({ editing: true });
+    this.setState({editing: true});
   }
 
   render() {
@@ -46,7 +46,7 @@ class TodoItem extends Component {
       element = (
         <TodoTextInput text={todo.text}
                        editing={this.state.editing}
-                       onSave={(text) => this.handleSave(todo.id, text)} />
+                       onSave={(text) => this.handleSave(todo._id, text)}/>
       );
     } else {
       element = (
@@ -54,12 +54,12 @@ class TodoItem extends Component {
           <input className="toggle"
                  type="checkbox"
                  checked={todo.completed}
-                 onChange={() => this.handleComplete(todo.id, todo.completed)} />
+                 onChange={() => this.handleComplete(todo._id, !todo.completed)}/>
           <label onDoubleClick={this.handleDoubleClick.bind(this)}>
             {todo.text}
           </label>
           <button className="destroy"
-                  onClick={() => this.handleDelete(todo.id)} />
+                  onClick={() => this.handleDelete(todo._id)}/>
         </div>
       );
     }
@@ -77,9 +77,9 @@ class TodoItem extends Component {
 
 TodoItem.propTypes = {
   todo: PropTypes.object.isRequired,
-  editTodo: PropTypes.func.isRequired,
-  deleteTodo: PropTypes.func.isRequired,
-  completeTodo: PropTypes.func.isRequired
+  requestEditTodo: PropTypes.func.isRequired,
+  requestDeleteTodo: PropTypes.func.isRequired,
+  requestCompleteTodo: PropTypes.func.isRequired
 };
 
 export default TodoItem;

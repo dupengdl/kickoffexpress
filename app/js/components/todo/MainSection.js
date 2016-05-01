@@ -63,16 +63,15 @@ class MainSection extends Component {
 
     const filteredTodos = todos.filter(TODO_FILTERS[filter]);
     const completedCount = todos.reduce((count, todo) =>
-        todo.completed ? count + 1 : count,
-      0
+        todo.completed ? count + 1 : count, 0
     );
 
     return (
       <section className="main-section">
-        /*TODO remove this when implement complete all action {this.renderToggleAll(completedCount)}*/
+        {/*TODO remove this when implement complete all action {this.renderToggleAll(completedCount)}*/}
         <ul className="todo-list">
           {filteredTodos.map(todo =>
-              <TodoItem key={todo.id} todo={todo} {...actions} />
+              <TodoItem key={todo._id} todo={todo} {...actions} />
           )}
         </ul>
         {this.renderFooter(completedCount)}
