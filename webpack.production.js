@@ -11,7 +11,7 @@ var config = {
     'vendor': ['react', 'react-dom', 'redux', 'redux-thunk', 'react-redux', 'react-router']
   },
   output: {
-    path: './static/',
+    path: path.join(__dirname, 'static'),
     filename: '[name].[chunkhash:8].js',
     publicPath: '/static/'
   },
@@ -31,7 +31,7 @@ var config = {
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css!postcss')
+        loader: ExtractTextPlugin.extract('style', 'css')
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
@@ -51,7 +51,7 @@ var config = {
     ]
   },
   sassLoader: {
-    includePaths: [path.resolve(__dirname, './app/sass'), path.resolve(__dirname, './node_modules'), path.resolve(__dirname, './node_modules/font-awesome/css')]
+    includePaths: [path.resolve(__dirname, './app/sass'), path.resolve(__dirname, './node_modules')]
   },
   postcss: [autoprefixer({browsers: ['last 2 versions']})],
   plugins: [
