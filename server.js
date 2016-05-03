@@ -109,7 +109,7 @@ if ('production' === env) {
     res.sendFile(path.join(__dirname, 'index.html'));
   });
 
-  app.listen(port, host, function (err, result) {
+  app.listen(port, function (err, result) {
     if (err) {
       console.log(err);
     }
