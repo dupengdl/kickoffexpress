@@ -17,4 +17,14 @@ TodoSchema.index({created: 1});
 
 TodoSchema.plugin(lastMod);
 
+// Duplicate the ID field.
+TodoSchema.virtual('id').get(function(){
+  return this._id.toHexString();
+});
+
+// Ensure virtual fields are serialised.
+TodoSchema.set('toJSON', {
+  virtuals: true
+});
+
 module.exports = mongoose.model('Todo', TodoSchema);
