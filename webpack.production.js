@@ -12,8 +12,7 @@ var config = {
   },
   output: {
     path: path.join(__dirname, 'static'),
-    filename: '[name].[chunkhash:8].js',
-    publicPath: '/static/'
+    filename: '[name].[chunkhash:8].js'
   },
   module: {
     preLoaders: [

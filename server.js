@@ -2,7 +2,6 @@ var webpack = require('webpack');
 var config = require('./webpack.config');
 var prodConfig = require('./webpack.production');
 var path = require('path');
-var staticPath = path.join(__dirname, config.output.publicPath);
 var express = require('express');
 var app = express();
 var host = 'localhost';
@@ -55,6 +54,7 @@ app.use('/api', require('./api'));
 if ('production' === env) {
   //生产环境
   console.log('Webpack now compiles.');
+  var staticPath = path.join(__dirname, 'static');
   //启动webpack编译
   webpack(prodConfig, function (err, stats) {
     if (err) {
