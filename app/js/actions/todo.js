@@ -101,7 +101,7 @@ export function requestCompleteTodo(id, completed) {
 function deleteTodo(id) {
   return {
     type: actions.DELETE_TODO,
-    _id: id
+    id: id
   };
 }
 

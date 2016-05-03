@@ -71,7 +71,7 @@ class MainSection extends Component {
         {/*TODO remove this when implement complete all action {this.renderToggleAll(completedCount)}*/}
         <ul className="todo-list">
           {filteredTodos.map(todo =>
-              <TodoItem key={todo._id} todo={todo} {...actions} />
+              <TodoItem key={todo.id} todo={todo} {...actions} />
           )}
         </ul>
         {this.renderFooter(completedCount)}
