@@ -59,7 +59,7 @@ var config = {
         NODE_ENV: '"production"'
       }
     }),
-    new ExtractTextPlugin('css/[name].[hash:8].css'),
+    new ExtractTextPlugin('[name].[hash:8].css'),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',//和上面配置的入口对应
       filename: 'vendor.[hash:8].js'//导出的文件的名称
