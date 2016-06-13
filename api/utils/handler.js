@@ -7,7 +7,7 @@ function send(res, data, status,  msg) {
     rtn: status || rtn.SUCCESS,
     data: data,
     msg: msg
-  })
+  });
 }
 
 /**

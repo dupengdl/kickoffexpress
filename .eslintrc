@@ -2,7 +2,10 @@
   "rules": {
     "quotes": [
       2,
-      "single"
+      "single",
+      {
+        "allowTemplateLiterals": true
+      }
     ],
     "linebreak-style": [
       2,
@@ -26,5 +29,13 @@
   },
   "plugins": [
     "react"
-  ]
+  ],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    }
+  }
 }

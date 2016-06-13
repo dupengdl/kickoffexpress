@@ -21,7 +21,7 @@ exports.findAllOfMine = function (params) {
       }
       resolve(todos);
     });
-  })
+  });
 };
 
 exports.update = function (id, params) {

@@ -7,6 +7,6 @@ module.exports = function lastModifiedPlugin(schema) {
 
   schema.pre('save', function (next) {
     this.lastMod = new Date();
-    next()
-  })
+    next();
+  });
 };
