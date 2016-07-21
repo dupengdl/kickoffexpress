@@ -1,6 +1,7 @@
 {
   "name": "kickoffexpress",
   "version": "0.0.1",
+  "private": true,
   "description": "Express&MongoDB learning",
   "main": "src/index.js",
   "scripts": {
@@ -67,5 +68,9 @@
     "redux": "^3.2.1",
     "redux-thunk": "^2.0.1",
     "serve-favicon": "^2.3.0"
+  },
+  "engines": {
+    "node" : ">=0.10.48",
+    "npm": "~1.0.20"
   }
 }
