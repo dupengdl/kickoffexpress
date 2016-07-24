@@ -6,11 +6,11 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node server.js",
-    "debug": "supervisor --ignore app server.js",
-    "build": "rm -rf static/ && NODE_ENV=production webpack --progress --config webpack.production.js",
-    "prod": "NODE_ENV=production node server.js",
-    "lint": "eslint api app",
-    "lintfix": "eslint api app --fix"
+    "debug": "nodemon  --ext js,html,json --ignore app --debug --harmony server.js",
+    "build": "rm -rf static/ && export NODE_ENV=production;webpack --progress --config webpack.production.js",
+    "prod": "export NODE_ENV=production;node server.js",
+    "lint": "eslint .",
+    "lintfix": "eslint . --fix"
   },
   "repository": {
     "type": "git",
@@ -37,10 +37,10 @@
     "file-loader": "^0.8.5",
     "html-webpack-plugin": "^2.16.0",
     "node-sass": "^3.4.2",
+    "nodemon": "^1.9.2",
     "postcss-loader": "^0.8.0",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.12.4",
-    "supervisor": "^0.10.0",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.12",
     "webpack-dev-middleware": "^1.6.1",
@@ -70,7 +70,7 @@
     "serve-favicon": "^2.3.0"
   },
   "engines": {
-    "node" : ">=0.10.48",
+    "node": ">=0.10.48",
     "npm": "~1.0.20"
   }
 }

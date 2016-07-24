@@ -57,8 +57,8 @@ var config = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
-      name: "vendor",//和上面配置的入口对应
-      filename: "vendor.js"//导出的文件的名称
+      name: 'vendor',//和上面配置的入口对应
+      filename: 'vendor.js'//导出的文件的名称
     }),
     new HtmlWebpackPlugin({
       template: './app/index.html',
