@@ -40,7 +40,7 @@ app.use(passport.session());
 require('./api/config/passport')(passport);
 
 //mongodb配置
-function connect() {
+function connect () {
   mongoose.connect(mongoConfig.uri, mongoConfig.options);
 }
 connect();
@@ -82,10 +82,10 @@ if ('production' === env) {
   //开发环境
   //添加热替换文件入口
   var hotArray = ['webpack-hot-middleware/client'];
-  (function(entry) {
-    if(entry){
-      for(var i in entry){
-        if(i != 'vendor'){
+  (function (entry) {
+    if (entry) {
+      for (var i in entry) {
+        if (i != 'vendor') {
           entry[i] = [].concat(hotArray, entry[i]);
         }
       }

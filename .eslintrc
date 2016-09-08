@@ -5,7 +5,7 @@
     "semi": [2, "always"],
     "react/jsx-uses-react": 1,
     "react/jsx-no-undef": 2,
-    "react/wrap-multilines": 2
+    "react/jsx-wrap-multilines": 2
   },
   "env": {
     "es6": true,
