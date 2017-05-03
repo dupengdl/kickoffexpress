@@ -6,7 +6,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node server.js",
-    "debug": "nodemon  --ext js,html,json --ignore app --debug --harmony server.js",
+    "debug": "nodemon  --ext js,html,json --ignore app --debug=3001 --harmony server.js",
     "build": "rm -rf static/ && export NODE_ENV=production;webpack --progress --config webpack.production.js",
     "prod": "export NODE_ENV=production;node server.js",
     "lint": "eslint .",

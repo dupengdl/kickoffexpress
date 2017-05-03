@@ -21,6 +21,7 @@ var cookieConfig = require('./api/config/cookie');
 //express中间件配置
 app.use(favicon(path.join(__dirname, 'app/image/favicon.ico')));
 app.use(session({
+  name: 'kickid',   // session id cookie name
   resave: true,
   saveUninitialized: false,
   secret: 'kickoffexpress',
