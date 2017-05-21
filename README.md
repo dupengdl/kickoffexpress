@@ -4,7 +4,7 @@
 利用express+mongodb搭建后端服务提供数据,前端采用React＋Redux的方式，结合webpack进行开发
 学习express开发流程及中间件的概念,学习mongodb相关知识及mongoose的使用,继续梳理redux的开发流程
 
-###总结[TODO]
+### 总结[TODO]
 1.  学习了express中session管理的相关内容
 2.  了解了passport的使用及调用流程
 3.  学习了express路由相关的配置管理及路由的访问限制
