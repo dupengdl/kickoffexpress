@@ -57,7 +57,7 @@
     "font-awesome": "^4.6.1",
     "isomorphic-fetch": "^2.2.1",
     "md5": "^2.1.0",
-    "mongoose": "^4.5.0",
+    "mongoose": "^5.7.5",
     "mongoose-user": "0.0.1",
     "normalize.css": "^3.0.3",
     "passport": "^0.3.2",
